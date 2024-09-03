@@ -1,0 +1,457 @@
+[
+    {
+        "course_code": "NGN 110",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 1,
+        "x": 0,
+        "y": 0
+    },
+    {
+        "course_code": "MTH 103",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 1,
+        "x": 0,
+        "y": 80
+    },
+    {
+        "course_code": "GER-SCI 1",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 1,
+        "x": 0,
+        "y": 160
+    },
+    {
+        "course_code": "GER-CORE 1",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 1,
+        "x": 0,
+        "y": 240
+    },
+    {
+        "course_code": "WRI 101",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 1,
+        "x": 0,
+        "y": 320
+    },
+    {
+        "course_code": "CMP 120",
+        "prerequisites": [
+            "NGN 110"
+        ],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 1,
+        "x": 150,
+        "y": 40
+    },
+    {
+        "course_code": "MTH 104",
+        "prerequisites": [
+            "MTH 103"
+        ],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 1,
+        "x": 150,
+        "y": 120
+    },
+    {
+        "course_code": "GER-SCI 2",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 1,
+        "x": 150,
+        "y": 200
+    },
+    {
+        "course_code": "GER-CORE 2",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 1,
+        "x": 150,
+        "y": 280
+    },
+    {
+        "course_code": "WRI 102",
+        "prerequisites": [
+            "WRI 101"
+        ],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 1,
+        "x": 150,
+        "y": 360
+    },
+    {
+        "course_code": "COE 221",
+        "prerequisites": [
+            "CMP 120"
+        ],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 2,
+        "x": 450,
+        "y": 0
+    },
+    {
+        "course_code": "CMP 220",
+        "prerequisites": [
+            "CMP 120"
+        ],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 2,
+        "x": 450,
+        "y": 80
+    },
+    {
+        "course_code": "MTH 221",
+        "prerequisites": [
+            "MTH 104"
+        ],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 2,
+        "x": 450,
+        "y": 160
+    },
+    {
+        "course_code": "MTH 213",
+        "prerequisites": [
+            "MTH 103"
+        ],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 2,
+        "x": 450,
+        "y": 240
+    },
+    {
+        "course_code": "ENG 204",
+        "prerequisites": [
+            "WRI 102"
+        ],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 2,
+        "x": 450,
+        "y": 320
+    },
+    {
+        "course_code": "STA 201",
+        "prerequisites": [
+            "MTH 103"
+        ],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 2,
+        "x": 600,
+        "y": 40
+    },
+    {
+        "course_code": "IEN 301",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 2,
+        "x": 600,
+        "y": 120
+    },
+    {
+        "course_code": "CMP 305",
+        "prerequisites": [
+            "CMP 220"
+        ],
+        "corequisites": [
+            "MTH 213"
+        ],
+        "semester": "Spring",
+        "year": 2,
+        "x": 600,
+        "y": 200
+    },
+    {
+        "course_code": "CMP 256",
+        "prerequisites": [
+            "CMP 220"
+        ],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 2,
+        "x": 600,
+        "y": 280
+    },
+    {
+        "course_code": "CMP 235",
+        "prerequisites": [
+            "WRI 102"
+        ],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 2,
+        "x": 600,
+        "y": 360
+    },
+    {
+        "course_code": "COE 251",
+        "prerequisites": [
+            "CMP 120",
+            "COE 221"
+        ],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 3,
+        "x": 900,
+        "y": 0
+    },
+    {
+        "course_code": "CMP 340",
+        "prerequisites": [
+            "STA 201",
+            "CMP 305"
+        ],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 3,
+        "x": 900,
+        "y": 80
+    },
+    {
+        "course_code": "CMP 320",
+        "prerequisites": [
+            "CMP 305"
+        ],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 3,
+        "x": 900,
+        "y": 160
+    },
+    {
+        "course_code": "GER-SCI 3",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 3,
+        "x": 900,
+        "y": 240
+    },
+    {
+        "course_code": "ENG 207",
+        "prerequisites": [
+            "ENG 204"
+        ],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 3,
+        "x": 900,
+        "y": 320
+    },
+    {
+        "course_code": "CMP 310",
+        "prerequisites": [
+            "COE 251",
+            "CMP 305"
+        ],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 3,
+        "x": 1050,
+        "y": 40
+    },
+    {
+        "course_code": "COE 371",
+        "prerequisites": [
+            "COE 221",
+            "MTH 104"
+        ],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 3,
+        "x": 1050,
+        "y": 120
+    },
+    {
+        "course_code": "CMP 333",
+        "prerequisites": [
+            "CMP 305"
+        ],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 3,
+        "x": 1050,
+        "y": 200
+    },
+    {
+        "course_code": "CMP 321",
+        "prerequisites": [
+            "CMP 305",
+            "CMP 256"
+        ],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 3,
+        "x": 1050,
+        "y": 280
+    },
+    {
+        "course_code": "MTH 343",
+        "prerequisites": [
+            "MTH 221"
+        ],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 3,
+        "x": 1050,
+        "y": 360
+    },
+    {
+        "course_code": "GER-CORE 3",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 3,
+        "x": 1050,
+        "y": 440
+    },
+    {
+        "course_code": "MJE XXX 1",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 4,
+        "x": 1350,
+        "y": 0
+    },
+    {
+        "course_code": "MJE XXX 2",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 4,
+        "x": 1350,
+        "y": 80
+    },
+    {
+        "course_code": "COE 420",
+        "prerequisites": [
+            "CMP 305",
+            "CMP 256"
+        ],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 4,
+        "x": 1350,
+        "y": 160
+    },
+    {
+        "course_code": "CMP 490",
+        "prerequisites": [
+            "CMP 235",
+            "ENG 207"
+        ],
+        "corequisites": [
+            "CMP 420"
+        ],
+        "semester": "Fall",
+        "year": 4,
+        "x": 1350,
+        "y": 240
+    },
+    {
+        "course_code": "FRE XXX 1",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 4,
+        "x": 1350,
+        "y": 320
+    },
+    {
+        "course_code": "FRE XXX 2",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Fall",
+        "year": 4,
+        "x": 1350,
+        "y": 400
+    },
+    {
+        "course_code": "GER-CORE 4",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 4,
+        "x": 1500,
+        "y": 40
+    },
+    {
+        "course_code": "MJE XXX 3",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 4,
+        "x": 1500,
+        "y": 120
+    },
+    {
+        "course_code": "FRE XXX 3",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 4,
+        "x": 1500,
+        "y": 200
+    },
+    {
+        "course_code": "CMP 491",
+        "prerequisites": [
+            "CMP 490"
+        ],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 4,
+        "x": 1500,
+        "y": 280
+    },
+    {
+        "course_code": "MJE XXX 4",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 4,
+        "x": 1500,
+        "y": 360
+    },
+    {
+        "course_code": "GER-CORE 5",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Spring",
+        "year": 4,
+        "x": 1500,
+        "y": 440
+    },
+    {
+        "course_code": "CMP 397",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": "Summer",
+        "year": 3,
+        "x": 1200,
+        "y": 0
+    }
+]

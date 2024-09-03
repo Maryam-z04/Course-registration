@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degree Plan</title>
+    
+    <script type='text/javascript' > 
+        window.current_sections = []; 
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include script.js file -->
+    <script src="{{ url_for('static', filename='degree_plan.js') }}" type="module"></script>
+    <script src="{{ url_for('static', filename='timetable.js') }}"></script>
+    <!-- include timetablejs.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='timetablejs.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='demo.css') }}">
+</head>
+<body>
+    <!-- header AUS-Planner in nice tailwind -->
+    <div class="bg-blue-500 text-white p-4 mb-5">
+        <h1 class="absolute text-2xl font-bold">AUS-Planner</h1>
+        <!-- add buttons for logout on the far right -->
+        <!-- center it vertically -->
+        <div class="flex items-center justify-end">
+            <a href="/logout" class="bg-red-500 text-white p-2">Logout</a>
+        </div>
+    </div>
+    <div class="main mx-5">
+        <!-- display "Completed Credits: " -->
+        <h3>Completed Credits: </h3> <span id="completed-credits" class="text-2xl font-bold">0</span>
+        <!-- SVG container -->
+        <svg id="degree-plan"></svg>
+        <!-- a div split vertically into two that spans the visible area one for showing a list of sections with add button and the other empty -->
+        <div class="select-sections">
+            <h3>Chosen Course: </h3> <h3 id="sel-crs-name">None</h3>
+            <select id="sections" style="border: 1px solid #ccc; padding: 5px;">
+                <option value="0">Select a section</option>
+            </select>
+            <button id="add-section" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">Add</button>
+        </div>
+        <div class="timetable"></div>
+    </div>
+    <script defer>
+
+        var timetable = new Timetable();
+
+        timetable.setScope(8, 20)
+
+        timetable.addLocations(['Monday', 'Tuesday', 'Wednesday', 'Thursday']);
+        timetable.useTwelveHour();
+        
+        // timetable.addEvent('Zumba', 'Madrid', new Date(2015,7,17,12), new Date(2015,7,17,13), { url: '#' });
+        // timetable.addEvent('Zumbu', 'Madrid', new Date(2015,7,17,13,30), new Date(2015,7,17,15), { url: '#' });
+        // timetable.addEvent('Lasergaming', 'London', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+        // timetable.addEvent('All-you-can-eat grill', 'New York', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
+        // timetable.addEvent('Hackathon', 'Tokyo', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
+        // timetable.addEvent('Tokyo Hackathon Livestream', 'Los Angeles', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
+        // timetable.addEvent('Lunch', 'Jakarta', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
+        // window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
+        // }});
+
+        var renderer = new Timetable.Renderer(timetable);
+        renderer.draw('.timetable');
+
+        let add_to_planner = (crn, course_code) => {
+            // make post request to /student/add_to_planner
+            // send crn and course_code
+            fetch('/student/add_to_planner', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    crn: crn,
+                    course_code: course_code
+                })
+            }).then((resp) => {
+                console.log('added course to planner');
+            })
+        }
+
+        let remove_from_planner = (crn) => {
+            // make post request to /student/remove_from_planner
+            // send crn
+            fetch('/student/remove_from_planner', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    crn: crn
+                })
+            }).then((resp) => {
+                console.log('removed course from planner');
+            })
+        }
+
+        let planner_courses = () => {
+            // get all courses in planner to add to timetable
+            fetch('/student/planner_courses').then((response) => {
+                return response.json();
+            }).then(async(data) => {
+
+                // for each object add to timetable
+                for (var i = 0; i < data.length; i++) {
+                    var section = data[i];
+                    await fetch('/student/section_info', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            crn: section.crn
+                        })
+                    }).then((resp) => {
+                        return resp.json();
+                    }).then((data) => {
+                        // add to current_sections array
+                        current_sections.push(data);
+                        draw_section(section.crn);
+                    })
+                    
+                }
+            })
+        }
+        
+        setTimeout(planner_courses, 500)
+        // listen for #add-section click
+        document.getElementById('add-section').addEventListener('click', () => {
+            // get the selected section
+            var section = document.getElementById('sections').value;
+            draw_section(section);
+            // find corresponding object in current_sections array
+            var section_obj = current_sections.find((obj) => {
+                return obj.crn == section;
+            })
+            add_to_planner(section, section_obj.course_code);
+        })
+
+        let draw_section = (crn) => {
+            // find the corresponding object in current_sections array
+            var section_obj = current_sections.find((obj) => {
+                return obj.crn == crn;
+            })
+            console.log(section_obj, current_sections);
+            let course_name_orig = document.querySelector('#sel-crs-name').innerText.split("(")[0]
+            // for each letter in day attribute (string) add to the corresponding event ("Monday", ...)
+            for (var i = 0; i < section_obj.days.length; i++) {
+                var day = section_obj.days[i];
+                var start_time = section_obj.start_time;
+                var end_time = section_obj.finish_time;
+                var instructor = section_obj.instructor;
+                let course_name = course_name_orig + " [Dr. " + instructor + "]"
+                // event name is based on day ("M" -> "Monday", "T" -> "Tuesday", ...)
+                var location = "";
+                switch (day) {
+                    case "M":
+                        location = "Monday";
+                        break;
+                    case "T":
+                        location = "Tuesday";
+                        break;
+                    case "W":
+                        location = "Wednesday";
+                        break;
+                    case "R":
+                        location = "Thursday";
+                        break;
+                    default:
+                        break;
+                }
+                console.log(start_time, end_time);
+                // break down time into hours, minutes
+                var start_time_arr = start_time.split(":");
+                var end_time_arr = end_time.split(":");
+                // create date objects
+                var start_date = new Date(2015,7,17,start_time_arr[0],start_time_arr[1]);
+                var end_date = new Date(2015,7,17,end_time_arr[0],end_time_arr[1]);
+                if(check_duplicate(course_name, section_obj.crn, start_date, end_date, location)) {
+                    break;
+                }
+                // add event
+                timetable.addEvent(course_name, location, start_date, end_date, { crn: section_obj.crn, class: day, onClick: function(event) {
+                    // window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
+                    // remove from planner
+                    remove_from_planner(event.options.crn);
+                    // remove from timetable
+                    timetable.removeEvent(event.options.crn);
+                    renderer.draw('.timetable');
+                } });
+                renderer.draw('.timetable');
+                console.log(timetable.events);
+            }
+        }
+
+        let check_duplicate = (name, crn, start_time, end_time, location) => {
+            // go through events and check for duplicates
+            // the "name" is attribute for every entry and "crn" is attribute under options
+            let events = timetable.events;
+            let duplicate = false;
+            for (let i = 0; i < events.length; i++) {
+                let event = events[i];
+                
+                // also check for time overlap 
+                let e_begin = event.startDate;
+                let e_end = event.endDate;
+                let e_location = event.location;
+                if (start_time >= e_begin && start_time <= e_end && location == e_location) {
+                    duplicate = true;
+                    break;
+                }
+
+            }
+
+            return duplicate;
+        }
+        
+
+
+    </script>
+</body>
+</html>
